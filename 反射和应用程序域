@@ -1,0 +1,48 @@
+运行该程序得到结果是什么？
+[Serializable]
+internal class A:MarshalByRefObject{
+  public static int Number;
+  
+  public void SetNumber(int value){
+    Number = value;
+  }
+}
+
+[Serializable]
+internal class B{
+  public static int Number;
+  
+  public void SetNumber(int value){
+    Number = value;
+  }
+}
+
+class Program{
+  static void Main(string[] args){
+    String assambly = Assembly.GetEntryAssembly().FullName;
+    AppDomain domain = AppDomain.CreateDomain("NewDomain");
+    
+    A. Number $=10$;
+    String nameOfA = typeof(A).FullName;
+    A a = domain.CreateInstanceAndUnwrap(assambly, nameOfA) as A; 
+    a.SetNumber(20);
+    Console. WriteLine("Number in class A is {0}",A.Number);
+    B.Number=10;
+    String nameOfB = typeof(B).FullName; 
+    B b=domain.CreateInstanceAndUnwrap(assambly, nameOfB) as B; 
+    b.SetNumber(20);
+    Console. WriteLine("Number in class B is {0}", B.Number);
+  }
+}
+
+  上述 C#代码先创建一个名为 NewDomain 的应用程序域, 并在该域中利用反射机制创建类型 A 的一个实例和类型 B的一个实例。
+我们注意到类型A继承自 MarshalByRefObject, 而B不是。虽然这两个类型的结构一样, 但由于基类不同而导致在跨越应用程序域
+的边界时表现出的行为将大不相同。
+  先考虑 A 的情况。由于 A 继承自 MarshalByRefObject, 那么 a 实际上 只是在默认的域中的一个代理实例 (Proxy), 它
+指向位于 NewDomain 域中 的 A 的一个实例。当调用 a 的方法 SetNumber 时, 是在 NewDomain 域中调用该方法的, 它将
+修改 NewDomain 域中静态变量 A.Number 的值并设为 20 。 由于静态变量在每个应用程序域中都有一份独立的拷贝, 修改 
+NewDomain 域中的静态变量 A.Number 对默认域中的静态变量 A.Number 没有任何影 响。由于 Console. WriteLine 是在
+默认的应用程序域中输出 A.Number, 因此 输出仍然是 10。
+  接着讨论 B。由于 B 只是从 Object 继承而来的类型, 它的实例穿越应用 程序域的边界时, 将会完整地复制实例。因此, 在上
+述代码中, 我们尽管试 图在 NewDomain 域中生成 B 的实例, 但会把实例 b 复制到默认的应用程序 域。此时调用方法 b.SetNumber 
+也是在默认的应用程序域上进行, 它将修改 默认的域上的 B.Number 并设为 20。再在默认的域上调用 Console.WriteLine 时, 它将输出 20。
