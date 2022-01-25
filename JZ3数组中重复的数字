@@ -1,0 +1,35 @@
+个人版本代码
+    int duplicate(vector<int>& numbers) {
+        // write code here
+        int n=numbers.size();
+        vector<int> counts(n,0);
+        for(const auto &num:numbers){
+            if(num<0)
+                return -1;
+            counts[num]=counts[num]+1;
+            if(counts[num]>1){
+                return num;
+            }
+        }
+        return -1;
+    }
+优化版本:交换思想——如果不一致就交换，如果交换的位置又和该数相同，则该数重复
+    int duplicate(vector<int>& numbers) {
+        // write code here
+       for(int i=0;i<numbers.size();i++){
+           if(numbers[i]<0)
+               return -1;
+           int temp=0;
+           while(numbers[i]!=i){
+               temp=numbers[numbers[i]];
+               if(temp==numbers[temp])
+                   return temp;
+               else{
+                   numbers[numbers[i]]=numbers[i];
+                   numbers[i]=temp;
+               }
+
+           }
+       }
+       return -1;
+    }
