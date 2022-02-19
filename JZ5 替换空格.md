@@ -49,7 +49,8 @@
 
 ​	所有字符都只复制一次，算法 时间效率为O(n)
 
-![1645242060496](/home/wukong/.config/Typora/typora-user-images/1645242060496.png)
+![image](https://user-images.githubusercontent.com/47242566/154785231-9d5d8c06-402f-425f-b392-3a44edda704e.png)
+
 
 
 
