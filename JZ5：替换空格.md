@@ -92,4 +92,23 @@
         return s;
     }
 ```
-
+精华题解：辅助栈python版本
+```python
+class Solution:
+    def replaceSpace(self , s ):
+        # write code here
+        stack = []
+        for c in s:
+            # 将空格替换 '%20' 并入栈
+            if c == ' ':stack.append('%20')
+            # 非空正常入栈
+            else: stack.append(c)
+        # 以字符串形式返回
+        return ''.join(stack)
+```
+精华题解：python replace
+```
+class Solution:
+    def replaceSpace(self, s):
+        return s.replace(' ', '%20')
+```
