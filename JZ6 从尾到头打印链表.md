@@ -62,3 +62,24 @@ public:
 ```
 
 问题：本题需要返回一个vector，因此空间复杂度并不能降低，如果单纯实现功能则可降低时间复杂度，另外循环中操作较多，导致时间复杂度也比较高
+
+书中解答：遍历顺序是从头到尾，输出顺序是从尾到头→后进先出→栈
+```C++
+void PrintListReversingly_Iteratively(ListNode* pHead)
+{
+    std::stack<ListNode*> nodes;
+    ListNode* pNode=pHead;
+    while(pNode!=nullptr)
+    {
+        nodes.push(pNode);
+        pNode=pNode->m_pNext;
+    }
+    while(!nodes.empty())
+    {
+        pNode=nodes.top();
+        printf("%d\t".pNode->m_nValue);
+        nodes.pop();
+    }
+}
+```
+或者使用递归
