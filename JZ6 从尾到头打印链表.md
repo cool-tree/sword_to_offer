@@ -3,8 +3,8 @@
 输入一个链表的头节点，按链表从尾到头的顺序返回每个节点的值（用数组返回）。
 
 如输入{1,2,3}的链表如下图:
+![image](https://user-images.githubusercontent.com/47242566/155068237-d0b58ce9-3175-4616-974b-5030a6de9d26.png)
 
-![image-20220221125734985](C:\Users\lenovo\AppData\Roaming\Typora\typora-user-images\image-20220221125734985.png)
 
 返回一个数组为[3,2,1]
 
