@@ -16,7 +16,7 @@
 
 ​	（2）方案：1.申请的一个堆栈，遍历链表并将元素入栈，再依次将栈中元素输出，时间复杂和空间复杂都是O(n)。2.将链表倒置链接，具体过程如下图所示
 
-![1145452288](C:\Users\lenovo\Desktop\1145452288.jpg)
+![mmexport1645425127443](https://user-images.githubusercontent.com/47242566/155068507-1bb2afc4-77fe-4d14-b954-f8f6a8b37f5e.jpg)
 
 ```c++
 /**
