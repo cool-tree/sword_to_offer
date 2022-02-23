@@ -83,3 +83,84 @@ void PrintListReversingly_Iteratively(ListNode* pHead)
 }
 ```
 或者使用递归
+```C++
+class Solution {
+public:
+    vector<int> printListFromTailToHead(ListNode* head) {
+        vector<int> ans;
+        if(head==NULL)
+            return ans;
+        reverse(ans,head);
+        return ans;
+    }
+    
+    void reverse(vector<int> &ans,ListNode* p1){
+        if(p1->next!=NULL){//递归用的是if而不是while
+            reverse(ans,p1->next);
+        }
+        ans.push_back(p1->val);
+    }
+};
+```
+
+精华题解：
+①反转数组
+```C++
+/**
+*  struct ListNode {
+*        int val;
+*        struct ListNode *next;
+*        ListNode(int x) :
+*              val(x), next(NULL) {
+*        }
+*  };
+*/
+class Solution {
+public:
+    vector<int> printListFromTailToHead(ListNode* head) {
+        vector<int> ans;
+          // 从头节点开始进行遍历
+        while(head){
+            // 将每个节点的权值放入动态数组里面
+            ans.push_back(head->val);
+            // 指针后移动
+            head=head->next;
+        }
+        // 反转整个数组
+        reverse(ans.begin(),ans.end());
+        return ans;
+    }
+};
+```
+②python版本辅助数组
+```pyhton
+class Solution:
+    # 返回从尾部到头部的列表值序列，例如[1,2,3]
+    def printListFromTailToHead(self, listNode):
+        # write code here
+        res = []
+        while listNode:
+            # 遍历链表，存入数组中
+            res.append(listNode.val)
+            listNode = listNode.next
+        # 数组反向输出
+        return res[::-1]
+```
+③python 版本栈
+```python
+class Solution:
+    # 返回从尾部到头部的列表值序列，例如[1,2,3]
+    def printListFromTailToHead(self, listNode):
+        # write code here
+        if not listNode:
+            return []
+        # 辅助栈
+        stack = []
+        res = []
+        while listNode:
+            stack.append(listNode.val) # 进栈
+            listNode = listNode.next
+        while stack:
+            res.append(stack.pop()) # 出栈
+        return res
+```
