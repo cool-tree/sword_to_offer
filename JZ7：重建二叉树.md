@@ -112,3 +112,18 @@ public:
     }
 };
 ```
+
+精华题解：
+
+（1）python 版本递归
+```python
+class Solution:
+  def reConstructBinaryTree(self, pre, tin):
+    if not pre:
+      return None
+    root = TreeNode(pre[0])
+    tmp = tin.index(pre[0])
+    root.left = self.reConstructBinaryTree(pre[1:tmp+1],tin[:tmp])
+    root.right = self.reConstructBinaryTree(pre[tmp+1:],tin[tmp+1:])
+    return root
+```
